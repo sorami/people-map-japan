@@ -15,3 +15,4 @@ A Japanese version of [A People Map of the US](https://pudding.cool/2019/05/peop
 - MLIT (Ministry of Land, Infrastructure, Transport and Tourism) of Japan
   - To calculate the coordinates of municipalities
   - [国土交通省「位置参照情報」](https://nlftp.mlit.go.jp/index.html) （2021年12月1日取得）をもとに作成
+  - => `preparation/data/pref_munic_coords.json`
