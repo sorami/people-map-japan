@@ -119,6 +119,7 @@ map.on("load", function() {
         map.on("mouseenter", `people-label-${group}`, showPopup);
     });
 
+    map.on("click", hidePopup);
     map.on("movestart", hidePopup);
     map.on("zoomstart", hidePopup);
 });
