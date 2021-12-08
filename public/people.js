@@ -171,16 +171,12 @@ function findHighlight(text) {
     }
 }
 
-function search(term) {
-    const matched = map.querySourceFeatures("people").forEach(person => {
-        const prop = person.properties;
-        if (prop.group == "na") {
-            //return prop.pref.includes(term) || prop.munic.includes(term);
-        } else {
-            if(prop.pref.includes(term) || prop.munic.includes(term) || 
-                   prop.person.includes(term) || prop.desc.includes(term)) {
-                       console.log(prop);
-                   }
-        }
-    });
+
+let locations = {};
+fetch("./data/locations.json")
+    .then(response => response.json())
+    .then(data => locations = data);
+
+function searchLocation(term) {
+    return locations.filter(loc => loc[0].includes(term));
 }
