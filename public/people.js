@@ -13,7 +13,6 @@ const map = new maplibregl.Map({
 });
 
 map.addControl(new maplibregl.NavigationControl({showCompass: false}), "top-right");
-map.addControl(new maplibregl.ScaleControl());
 map.addControl(new maplibregl.GeolocateControl());
 
 
