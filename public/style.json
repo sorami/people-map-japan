@@ -9,10 +9,6 @@
     "openmaptiles": {
       "type": "vector",
       "url": "https://tile2.openstreetmap.jp/data/japan.json"
-    },
-    "people": {
-      "type": "geojson",
-      "data": "./people.geojson"
     }
   },
   "glyphs": "https://tile2.openstreetmap.jp/fonts/{fontstack}/{range}.pbf",

@@ -37,6 +37,11 @@ const labelMinZoomDict = {
 }
 
 map.on("load", function() {
+    map.addSource("people", {
+        "type": "geojson",
+        "data": "./data/people.geojson"
+    });
+
     // Location without a person
     map.addLayer({
         "id": "people-label-na",
@@ -164,4 +169,18 @@ function findHighlight(text) {
     } else {
         return Math.max(bracket, particle);
     }
+}
+
+function search(term) {
+    const matched = map.querySourceFeatures("people").forEach(person => {
+        const prop = person.properties;
+        if (prop.group == "na") {
+            //return prop.pref.includes(term) || prop.munic.includes(term);
+        } else {
+            if(prop.pref.includes(term) || prop.munic.includes(term) || 
+                   prop.person.includes(term) || prop.desc.includes(term)) {
+                       console.log(prop);
+                   }
+        }
+    });
 }
