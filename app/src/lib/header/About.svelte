@@ -111,7 +111,7 @@
 	#modal {
 		position: relative;
 		border-radius: 0.5em;
-		max-width: 27em;
+		max-width: 22em;
 		margin: 0 1em;
 		background: #444;
 		filter: drop-shadow(10px 10px 10px #1118);
