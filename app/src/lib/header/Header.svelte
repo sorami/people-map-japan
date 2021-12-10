@@ -1,5 +1,6 @@
 <script lang="ts">
 	import 'material-design-icons/iconfont/material-icons.css';
+	import About, { getModal } from '$lib/header/About.svelte';
 	import { flyTo } from '$lib/map/Map.svelte';
 
 	function flyToOrigin() {
@@ -12,10 +13,12 @@
 		<a href="https://sorami.dev/" target="_blank" rel="noreferrer">sorami.dev</a>
 	</div>
 	<div class="title" on:click={flyToOrigin}>A People Map of Japan</div>
-	<div class="about">
+	<div class="about" on:click={() => getModal().open()}>
 		<i class="material-icons">help_outline</i>
 	</div>
 </header>
+
+<About />
 
 <style>
 	header {

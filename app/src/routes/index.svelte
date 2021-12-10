@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import Map from '$lib/map/Map.svelte';
-	import Header from '$lib/Header.svelte';
+	import Header from '$lib/header/Header.svelte';
 </script>
 
 <svelte:head>
