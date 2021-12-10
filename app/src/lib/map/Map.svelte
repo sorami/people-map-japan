@@ -136,10 +136,10 @@
 		loadMap();
 	});
 
-	const flyToLabel = function(e) {
+	const flyToLabel = function (e) {
 		hidePopup();
 		flyTo(e.features[0].geometry.coordinates);
-	}
+	};
 
 	const popup = new maplibregl.Popup({
 		closeButton: false,
