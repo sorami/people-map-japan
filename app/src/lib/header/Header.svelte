@@ -21,14 +21,14 @@
 		position: absolute;
 		width: 100%;
 		margin-bottom: 1em;
-		padding: 0.25em 0;
+		padding: 0.5em 0;
 
 		display: inline-flex;
 		justify-content: space-between;
 		align-items: center;
 
-		box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.25);
-		background-color: rgba(0, 0, 0, 0.75);
+		background-color: rgb(33, 33, 33, 0.75);
+		box-shadow: 0 2px 4px 0 rgb(33, 33, 33, 0.25);
 	}
 
 	.website {
@@ -52,7 +52,6 @@
 		color: #34be82;
 		font-size: 1.2em;
 		font-weight: bold;
-		font-family: sans-serif;
 		padding: 0;
 		margin: 0;
 		opacity: 0.85;

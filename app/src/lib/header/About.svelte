@@ -60,8 +60,12 @@
 			<p>
 				地図データには <a href="https://openstreetmap.jp/" target="_blank" rel="noreferrer"
 					>OpenStreetMap</a
-				> を利用しています。また、各市区町村の緯度経度を算出するために<a href="https://nlftp.mlit.go.jp/index.html" target="_blank" rel="noreferrer"
-				>国土交通省「位置参照情報」</a>データを用いました。
+				>
+				を利用しています。また、各市区町村の緯度経度を算出するために<a
+					href="https://nlftp.mlit.go.jp/index.html"
+					target="_blank"
+					rel="noreferrer">国土交通省「位置参照情報」</a
+				>データを用いました。
 			</p>
 
 			<p>
@@ -115,7 +119,8 @@
 		max-height: calc(100vh - 20px);
 		overflow: auto;
 	}
-	#modal-content h1, h2 {
+	#modal-content h1,
+	h2 {
 		margin: 0;
 	}
 	#modal-content h1 {
