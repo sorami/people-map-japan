@@ -32,17 +32,18 @@
 		align-items: center;
 
 		box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.25);
-		background-color: rgba(0, 0, 0, 0.6);
+		background-color: rgba(0, 0, 0, 0.75);
 	}
 
 	.website {
 		margin-left: 1em;
-		font-size: 0.8em;
+		font-size: 1em;
 		font-weight: bold;
+		font-family: monospace;
 	}
 	.website a {
 		color: #fff;
-		opacity: 0.25;
+		opacity: 0.5;
 		text-decoration: none;
 	}
 	.website a:hover {
@@ -55,17 +56,19 @@
 		color: #34be82;
 		font-size: 1.2em;
 		font-weight: bold;
+		font-family: serif;
 		padding: 0;
 		margin: 0;
-		opacity: 0.8;
+		opacity: 0.85;
 	}
 	.title:hover {
+		color: #fff;
 		cursor: pointer;
 	}
 
 	.about {
 		margin-right: 1em;
-		opacity: 0.5;
+		opacity: 0.75;
 		color: #fff;
 	}
 	.about:hover {
