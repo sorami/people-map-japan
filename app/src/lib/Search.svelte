@@ -1,40 +1,48 @@
+<script context="module" lang="ts">
+
+</script>
+
 <script lang="ts">
 	import 'material-design-icons/iconfont/material-icons.css';
+	import { flyTo } from '$lib/map/Map.svelte';
+
+	let searchTerm = '';
+	let hideSearchResults = false;
 
 	type Location = [string, [number, number]]; // [name, [lon, lat]]
 	let locations: Location[] = [];
 	let matchedLocations: Location[] = [];
-	let searchTerm = '';
 
 	fetch('/data/locations.json')
 		.then((res) => res.json())
 		.then((data) => (locations = data))
 		.catch((e) => console.error(e));
 
-	let hideSearchResult = false;
 	$: {
-		if (searchTerm === '' || hideSearchResult) {
+		if (searchTerm === '' || hideSearchResults) {
 			matchedLocations = [];
 		} else {
 			matchedLocations = locations.filter((loc) => loc[0].includes(searchTerm));
 		}
 	}
 
-	function resetTerm(): void {
+	export function resetSearchTerm(): void {
 		searchTerm = '';
+		hideSearchResults = false;
 	}
 
-	import { flyTo } from '$lib/map/Map.svelte';
-	function flyToAndReset(loc: Location): void {
-		searchTerm = loc[0];
+	export function setSearchTerm(text: string): void {
+		searchTerm = text;
+		hideSearchResults = true;
+	}
+
+	function flyAndSetSearchTerm(loc: Location): void {
+		setSearchTerm(loc[0]);
 		flyTo(loc[1]);
-		hideSearchResult = true;
 	}
 	function flyToRandom(): void {
 		const selected = locations[Math.floor(Math.random() * locations.length)];
-		flyTo(selected[1], 10);
-		searchTerm = selected[0];
-		hideSearchResult = true;
+		flyAndSetSearchTerm(selected);
 	}
 </script>
 
@@ -53,18 +61,18 @@
 			<input
 				type="text"
 				bind:value={searchTerm}
-				on:input={() => (hideSearchResult = false)}
+				on:input={() => (hideSearchResults = false)}
 				placeholder="市区町村を探す"
 			/>
 		</div>
-		<div class="button" on:click={resetTerm}>
+		<div class="button" on:click={resetSearchTerm}>
 			<i class="material-icons">close</i>
 		</div>
 	</div>
 	<div id="search-results">
 		<ul>
 			{#each matchedLocations as loc}
-				<li class="search-result-item" on:click={() => flyToAndReset(loc)}>{loc[0]}</li>
+				<li class="search-result-item" on:click={() => flyAndSetSearchTerm(loc)}>{loc[0]}</li>
 			{/each}
 		</ul>
 	</div>
