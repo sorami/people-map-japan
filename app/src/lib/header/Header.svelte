@@ -1,18 +1,13 @@
 <script lang="ts">
 	import 'material-design-icons/iconfont/material-icons.css';
 	import About, { getModal } from '$lib/header/About.svelte';
-	import { flyTo } from '$lib/map/Map.svelte';
-
-	function flyToOrigin() {
-		flyTo([139.767144, 35.680621], 5);
-	}
 </script>
 
 <header>
 	<div class="website">
 		<a href="https://sorami.dev/" target="_blank" rel="noreferrer">sorami.dev</a>
 	</div>
-	<div class="title" on:click={flyToOrigin}>A People Map of Japan</div>
+	<div class="title" on:click={() => getModal().open()}>A People Map of Japan</div>
 	<div class="about" on:click={() => getModal().open()}>
 		<i class="material-icons">help_outline</i>
 	</div>
@@ -63,7 +58,6 @@
 		opacity: 0.85;
 	}
 	.title:hover {
-		color: #fff;
 		cursor: pointer;
 	}
 
