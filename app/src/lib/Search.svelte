@@ -1,4 +1,6 @@
 <script lang="ts">
+    import 'material-design-icons/iconfont/material-icons.css';
+
 	type Location = [string, [number, number]]; // [name, [lon, lat]]
 	let locations: Location[] = [];
 	let matchedLocations: Location[] = [];
@@ -30,28 +32,36 @@
 	}
 	function flyToRandom(): void {
 		const selected = locations[Math.floor(Math.random() * locations.length)];
-		flyTo(selected[1], 9);
+		flyTo(selected[1], 10);
 		searchTerm = selected[0];
 		hideSearchResult = true;
 	}
 </script>
 
+
+<div id="random" on:click={flyToRandom}>
+    <i class="material-icons">flight_takeoff</i>
+    <span>ランダム</span>
+    <i class="material-icons">navigate_next</i>
+</div>
+
 <div id="search-container">
-	<div id="search-line-container">
-		<div id="search-bar">
-			<div class="icon">?</div>
-			<div class="input">
-				<input
-					type="text"
-					bind:value={searchTerm}
-					on:input={() => (hideSearchResult = false)}
-					placeholder="市区町村を探す"
-				/>
-			</div>
-			<div class="button" on:click={resetTerm}>x</div>
-		</div>
-		<div id="random" on:click={flyToRandom}>ランダム</div>
-	</div>
+    <div id="search-bar">
+        <div class="icon">
+            <i class="material-icons">search</i>
+        </div>
+        <div class="input">
+            <input
+                type="text"
+                bind:value={searchTerm}
+                on:input={() => (hideSearchResult = false)}
+                placeholder="市区町村を探す"
+            />
+        </div>
+        <div class="button" on:click={resetTerm}>
+            <i class="material-icons">close</i>
+        </div>
+    </div>
 	<div id="search-results">
 		<ul>
 			{#each matchedLocations as loc}
@@ -62,37 +72,39 @@
 </div>
 
 <style>
-	*:focus {
-		outline: none;
+    .material-icons {
+        vertical-align: middle;
+    }
+
+    #random {
+        z-index: 1;
+        position: absolute;
+        top: 1em;
+        left: 0;
+        margin: 2em 1em;
+        padding: 0.5em;
+        border-radius: 0.5em;
+		box-shadow: 0 4px 8px rgb(0, 0, 0, 0.5);
+		background-color: #E26A2C;
+        color: #fff;
+        font-weight: bold;
+    }
+	#random:hover {
+        background-color: #FF8243;
+		cursor: pointer;
 	}
+    #random span {
+        vertical-align: middle;
+    }
 
 	#search-container {
 		z-index: 1;
 		position: absolute;
 		top: 1em;
-		left: 0;
-		margin: 2em;
+		right: 0;
+		margin: 2em 1em;
 		--text-color: #333;
 		--background-color: #fff;
-	}
-
-	#search-line-container {
-		display: flex;
-		align-items: center;
-	}
-
-	#random {
-		margin-left: 0.5em;
-		padding: 0.5em;
-		border-radius: 0.5em;
-		box-shadow: 0 4px 8px rgb(0, 0, 0, 0.5);
-
-		color: #fff;
-		background-color: #eb6100;
-	}
-	#random:hover {
-		background: #f56500;
-		cursor: pointer;
 	}
 
 	#search-bar {
@@ -100,21 +112,19 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		width: 15em;
+		width: 18em;
 		background: var(--background-color);
 		color: var(--text-color);
 	}
 	#search-bar .icon {
-		margin-left: 0.5em;
-		margin-right: 1em;
-		opacity: 0.7;
+		margin: 0 0.5em;
 	}
 	#search-bar .input {
 		margin: 0.5em 0;
 	}
 	#search-bar .input input {
 		font-size: 1rem;
-		width: 90%;
+		width: 13em;
 		border: none;
 		background-color: var(--background-color);
 	}
@@ -130,13 +140,13 @@
 		background-color: var(--background-color);
 	}
 	#search-bar .button:hover {
-		background-color: rgba(0, 0, 0, 0.1);
+		background-color: rgba(0, 0, 0, 0.25);
 	}
 
 	#search-results {
 		color: var(--text-color);
 		background-color: var(--background-color);
-		width: 15em;
+		width: 18em;
 		max-height: 20em;
 		overflow-y: scroll;
 		overflow-x: hidden;
