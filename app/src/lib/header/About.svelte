@@ -76,7 +76,6 @@
 					rel="noreferrer">GitHub</a
 				> で公開しています。詳細はそちらをご覧ください。
 			</p>
-			<p class="last">Enjoy! - <a href="https://sorami.dev/" target="_blank" rel="noreferrer">sorami</a></p>
 		</div>
 	</div>
 </section>
@@ -147,10 +146,5 @@
 	#modal-content a:hover {
 		color: #34be82;
 		text-decoration: none;
-	}
-
-	#modal-content p.last {
-		font-style: italic;
-		text-align: right;
 	}
 </style>
