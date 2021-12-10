@@ -45,7 +45,11 @@
 					href="https://pudding.cool/2019/05/people-map/"
 					target="_blank"
 					rel="noreferrer">A People Map of the US</a
-				>. This is not my original idea, all credit goes to the awesome team at
+				> / <a
+				href="https://pudding.cool/2019/06/people-map-uk/"
+				target="_blank"
+				rel="noreferrer">UK</a
+			>. This is not my original idea, all credit goes to the awesome team at
 				<a href="https://pudding.cool/" target="_blank" rel="noreferrer">The Pudding</a>!
 			</p>
 
