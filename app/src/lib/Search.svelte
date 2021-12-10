@@ -1,10 +1,6 @@
-<script context="module" lang="ts">
-
-</script>
-
 <script lang="ts">
-	import 'material-design-icons/iconfont/material-icons.css';
 	import { flyTo } from '$lib/map/Map.svelte';
+	import 'material-design-icons/iconfont/material-icons.css';
 
 	let searchTerm = '';
 	let hideSearchResults = false;
@@ -26,23 +22,24 @@
 		}
 	}
 
-	export function resetSearchTerm(): void {
-		searchTerm = '';
-		hideSearchResults = false;
-	}
-
 	export function setSearchTerm(text: string): void {
 		searchTerm = text;
 		hideSearchResults = true;
 	}
 
-	function flyAndSetSearchTerm(loc: Location): void {
-		setSearchTerm(loc[0]);
-		flyTo(loc[1]);
+	export function resetSearchTerm(): void {
+		searchTerm = '';
+		hideSearchResults = false;
 	}
+
+	function flyToAndSetSearchTerm(loc: Location): void {
+		flyTo(loc[1]);
+		setSearchTerm(loc[0]);
+	}
+
 	function flyToRandom(): void {
 		const selected = locations[Math.floor(Math.random() * locations.length)];
-		flyAndSetSearchTerm(selected);
+		flyToAndSetSearchTerm(selected);
 	}
 </script>
 
@@ -72,7 +69,7 @@
 	<div id="search-results">
 		<ul>
 			{#each matchedLocations as loc}
-				<li class="search-result-item" on:click={() => flyAndSetSearchTerm(loc)}>{loc[0]}</li>
+				<li class="search-result-item" on:click={() => flyToAndSetSearchTerm(loc)}>{loc[0]}</li>
 			{/each}
 		</ul>
 	</div>
