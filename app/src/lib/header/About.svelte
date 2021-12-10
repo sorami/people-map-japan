@@ -32,15 +32,14 @@
 			<p>「地名」を「出身人物名」に置き換えた地図です。</p>
 			<p>円の大きさはWikipediaページのアクセス数を表しています。</p>
 			<p>
-				オリジナルである
-				<a
+				<a href="https://pudding.cool/" target="_blank" rel="noreferrer">The Pudding</a>による<a
 					href="https://pudding.cool/2019/05/people-map/"
 					target="_blank"
 					rel="noreferrer">US版</a
 				>、<a href="https://pudding.cool/2019/06/people-map-uk/" target="_blank" rel="noreferrer"
 					>UK版</a
-				>を作成した <a href="https://pudding.cool/" target="_blank" rel="noreferrer">The Pudding</a> の了承を得て、独自に作成した日本版です。
-				アイデアは The Pudding によるもので、当ページの発案したものではありません。
+				>をもとにしています。彼らの了承を得て、独自に作成した日本版です。People
+				Mapのアイデア自体はThe Puddingによるものです。
 			</p>
 			<p>
 				A Japanese version of The Pudding's <a
@@ -60,13 +59,12 @@
 					href="https://ja.wikipedia.org/wiki/%E5%87%BA%E8%BA%AB%E5%88%A5%E3%81%AE%E4%BA%BA%E5%90%8D%E8%A8%98%E4%BA%8B%E4%B8%80%E8%A6%A7%E3%81%AE%E4%B8%80%E8%A6%A7#%E6%97%A5%E6%9C%AC%E3%81%AE%E5%9C%B0%E5%9F%9F%EF%BC%88%E9%83%BD%E9%81%93%E5%BA%9C%E7%9C%8C%E3%80%81%E5%B8%82%E7%94%BA%E6%9D%91%EF%BC%89"
 					target="_blank"
 					rel="noreferrer">日本語版Wikipedia</a
-				> のデータから、各市区町村の出身者のうち、年間（2020年12月-2021年11月）で最もアクセス数の多かった人物（ページ）を選択しています。
+				>のデータから、各市区町村の出身者のうち、年間（2020年12月-2021年11月）で最もアクセス数の多かった人物（ページ）を選択しています。
 			</p>
 			<p>
-				地図データには <a href="https://openstreetmap.jp/" target="_blank" rel="noreferrer"
+				地図データには<a href="https://openstreetmap.jp/" target="_blank" rel="noreferrer"
 					>OpenStreetMap</a
-				>
-				を利用しています。また、各市区町村の緯度経度を算出するために<a
+				>を利用しています。また、各市区町村の緯度経度を算出するために<a
 					href="https://nlftp.mlit.go.jp/index.html"
 					target="_blank"
 					rel="noreferrer">国土交通省「位置参照情報」</a
@@ -74,9 +72,11 @@
 			</p>
 
 			<p>
-				実装には
-				<a href="https://kit.svelte.dev/" target="_blank" rel="noreferrer">SvelteKit</a> と
-				<a href="https://maplibre.org/" target="_blank" rel="noreferrer">MapLibre GL JS</a> を使いました。
+				実装には<a href="https://kit.svelte.dev/" target="_blank" rel="noreferrer">SvelteKit</a>と<a
+					href="https://maplibre.org/"
+					target="_blank"
+					rel="noreferrer">MapLibre GL JS</a
+				>を使いました。
 			</p>
 			<p>
 				全てのデータとコードは <a
