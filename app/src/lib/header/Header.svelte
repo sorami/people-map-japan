@@ -49,7 +49,7 @@
 	}
 
 	.title {
-		color: #34be82;
+		color: #fff;
 		font-size: 1.2em;
 		font-weight: bold;
 		padding: 0;
@@ -57,6 +57,7 @@
 		opacity: 0.85;
 	}
 	.title:hover {
+		color: #34be82;
 		cursor: pointer;
 	}
 
