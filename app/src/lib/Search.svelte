@@ -40,7 +40,7 @@
 
 <div id="random" on:click={flyToRandom}>
 	<i class="material-icons">flight_takeoff</i>
-	<span>ランダム</span>
+	<span>どこかへ飛ぶ</span>
 	<i class="material-icons">navigate_next</i>
 </div>
 
