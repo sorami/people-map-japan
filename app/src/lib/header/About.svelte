@@ -97,7 +97,7 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: #8888;
+		background: rgba(33, 33, 33, 0.75);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -110,7 +110,7 @@
 		max-width: 27em;
 		margin: 0 1em;
 		background: #444;
-		filter: drop-shadow(10px 10px 10px #3338);
+		filter: drop-shadow(10px 10px 10px #1118);
 		padding: 2em;
 	}
 
