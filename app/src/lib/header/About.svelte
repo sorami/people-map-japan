@@ -97,11 +97,11 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: #2228;
+		background: #8888;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: #444;
+		color: #eee;
 	}
 
 	#modal {
@@ -109,8 +109,8 @@
 		border-radius: 0.5em;
 		max-width: 27em;
 		margin: 0 1em;
-		background: #fff;
-		filter: drop-shadow(5px 5px 5px #555);
+		background: #444;
+		filter: drop-shadow(10px 10px 10px #3338);
 		padding: 2em;
 	}
 
@@ -129,7 +129,7 @@
 		color: #34be82;
 	}
 	#modal-content h1 small {
-		color: #444;
+		color: #aaa;
 		font-size: 0.8em;
 		margin-left: 0.25em;
 	}
@@ -146,7 +146,7 @@
 		font-size: 0.8em;
 	}
 	#modal-content a {
-		color: #444;
+		color: #eee;
 	}
 	#modal-content a:hover {
 		color: #34be82;
