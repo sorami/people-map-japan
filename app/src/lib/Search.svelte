@@ -1,10 +1,10 @@
 <script lang="ts">
-    import 'material-design-icons/iconfont/material-icons.css';
+	import 'material-design-icons/iconfont/material-icons.css';
 
 	type Location = [string, [number, number]]; // [name, [lon, lat]]
 	let locations: Location[] = [];
 	let matchedLocations: Location[] = [];
-	let searchTerm: string = '';
+	let searchTerm = '';
 
 	fetch('/data/locations.json')
 		.then((res) => res.json())
@@ -38,30 +38,29 @@
 	}
 </script>
 
-
 <div id="random" on:click={flyToRandom}>
-    <i class="material-icons">flight_takeoff</i>
-    <span>ランダム</span>
-    <i class="material-icons">navigate_next</i>
+	<i class="material-icons">flight_takeoff</i>
+	<span>ランダム</span>
+	<i class="material-icons">navigate_next</i>
 </div>
 
 <div id="search-container">
-    <div id="search-bar">
-        <div class="icon">
-            <i class="material-icons">search</i>
-        </div>
-        <div class="input">
-            <input
-                type="text"
-                bind:value={searchTerm}
-                on:input={() => (hideSearchResult = false)}
-                placeholder="市区町村を探す"
-            />
-        </div>
-        <div class="button" on:click={resetTerm}>
-            <i class="material-icons">close</i>
-        </div>
-    </div>
+	<div id="search-bar">
+		<div class="icon">
+			<i class="material-icons">search</i>
+		</div>
+		<div class="input">
+			<input
+				type="text"
+				bind:value={searchTerm}
+				on:input={() => (hideSearchResult = false)}
+				placeholder="市区町村を探す"
+			/>
+		</div>
+		<div class="button" on:click={resetTerm}>
+			<i class="material-icons">close</i>
+		</div>
+	</div>
 	<div id="search-results">
 		<ul>
 			{#each matchedLocations as loc}
@@ -72,30 +71,30 @@
 </div>
 
 <style>
-    .material-icons {
-        vertical-align: middle;
-    }
+	.material-icons {
+		vertical-align: middle;
+	}
 
-    #random {
-        z-index: 1;
-        position: absolute;
-        top: 1em;
-        left: 0;
-        margin: 2em 1em;
-        padding: 0.5em;
-        border-radius: 0.5em;
+	#random {
+		z-index: 1;
+		position: absolute;
+		top: 1em;
+		left: 0;
+		margin: 2em 1em;
+		padding: 0.5em;
+		border-radius: 0.5em;
 		box-shadow: 0 4px 8px rgb(0, 0, 0, 0.5);
-		background-color: #E26A2C;
-        color: #fff;
-        font-weight: bold;
-    }
+		background-color: #e26a2c;
+		color: #fff;
+		font-weight: bold;
+	}
 	#random:hover {
-        background-color: #FF8243;
+		background-color: #ff8243;
 		cursor: pointer;
 	}
-    #random span {
-        vertical-align: middle;
-    }
+	#random span {
+		vertical-align: middle;
+	}
 
 	#search-container {
 		z-index: 1;

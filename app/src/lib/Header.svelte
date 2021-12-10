@@ -11,9 +11,7 @@
 	<div class="website">
 		<a href="https://sorami.dev/" target="_blank" rel="noreferrer">sorami.dev</a>
 	</div>
-	<div class="title" on:click={flyToOrigin}>
-		A People Map of Japan
-	</div>
+	<div class="title" on:click={flyToOrigin}>A People Map of Japan</div>
 	<div class="about">
 		<i class="material-icons">help_outline</i>
 	</div>
@@ -26,7 +24,7 @@
 		width: 100%;
 		margin-bottom: 1em;
 		padding: 0.25em 0;
-			
+
 		display: inline-flex;
 		justify-content: space-between;
 		align-items: center;
