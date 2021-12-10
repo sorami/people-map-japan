@@ -1,39 +1,88 @@
-<script context="module" lang="ts">
-	let map: maplibregl.Map;
+<script lang="ts">
+	import 'material-design-icons/iconfont/material-icons.css';
+	import 'maplibre-gl/dist/maplibre-gl.css';
+	import './popup.css';
+	import './search.css';
+	import './random.css';
 
-	export function flyTo(center: [number, number], zoom = 11): void {
+	import maplibregl from 'maplibre-gl';
+	import { onMount } from 'svelte';
+	import { addHighlight } from './utils';
+
+	type Location = [string, [number, number]]; // [name, [lon, lat]]
+
+	let map: maplibregl.Map;
+	let popup: maplibregl.Popup;
+	let locations: Location[] = [];
+	let matchedLocations: Location[] = [];
+	let searchTerm = '';
+	let hideSearchResults = false;
+
+	$: {
+		if (searchTerm === '' || hideSearchResults) {
+			matchedLocations = [];
+		} else {
+			matchedLocations = locations.filter((loc) => loc[0].includes(searchTerm));
+		}
+	}
+
+	onMount(async () => {
+		loadMap();
+
+		fetch('/data/locations.json')
+			.then((res) => res.json())
+			.then((data) => (locations = data))
+			.catch((e) => console.error(e));
+	});
+
+	function setSearchTerm(text: string): void {
+		searchTerm = text;
+		hideSearchResults = true;
+	}
+
+	function clearSearchTerm(): void {
+		searchTerm = '';
+		hideSearchResults = false;
+	}
+
+	const showPopup = function (e) {
+		const coordinates = e.features[0].geometry.coordinates;
+		popup.setLngLat(coordinates);
+		const prop = e.features[0].properties;
+		const content = `
+			<div class="location">${prop.pref}&nbsp;${prop.munic}</div>
+			${addHighlight(prop.desc)}
+			<a href=${prop.url} target="_blank">Wikipedia</a>
+		`;
+		popup.setHTML(content);
+		popup.addTo(map);
+	};
+
+	const hidePopup = function () {
+		popup.remove();
+	};
+
+	function flyTo(center: [number, number], zoom = 11): void {
 		if (map) {
 			map.flyTo({ center, zoom });
 		}
 	}
-</script>
 
-<script lang="ts">
-	import 'maplibre-gl/dist/maplibre-gl.css';
-	import './popup.css';
-	import maplibregl from 'maplibre-gl';
-	import { onMount } from 'svelte';
-	import Search from '$lib/map/Search.svelte';
+	function flyToAndSetSearchTerm(loc: Location): void {
+		flyTo(loc[1]);
+		setSearchTerm(loc[0]);
+	}
 
-	let searchComponent: Search;
+	function flyToRandom(): void {
+		const selected = locations[Math.floor(Math.random() * locations.length)];
+		flyToAndSetSearchTerm(selected);
+	}
 
-	const locationGroups = ['sm', 'md', 'lg'];
-	const circleRadiusDict = {
-		sm: 5,
-		md: 15,
-		lg: 30
-	};
-	const labelSizeDict = {
-		na: 0.8,
-		sm: 0.9,
-		md: 1,
-		lg: 1.2
-	};
-	const labelMinZoomDict = {
-		na: 9,
-		sm: 6,
-		md: 5,
-		lg: 0
+	const flyToLabelClick = function (e) {
+		hidePopup();
+		const props = e.features[0].properties;
+		setSearchTerm(props.pref + props.munic);
+		flyTo(e.features[0].geometry.coordinates);
 	};
 
 	function loadMap(): void {
@@ -54,7 +103,31 @@
 			attributionControl: false
 		});
 
+		popup = new maplibregl.Popup({
+			closeButton: false,
+			closeOnClick: true
+		});
+
 		map.on('load', function () {
+			const locationGroups = ['sm', 'md', 'lg'];
+			const circleRadiusDict = {
+				sm: 5,
+				md: 15,
+				lg: 30
+			};
+			const labelSizeDict = {
+				na: 0.8,
+				sm: 0.9,
+				md: 1,
+				lg: 1.2
+			};
+			const labelMinZoomDict = {
+				na: 9,
+				sm: 6,
+				md: 5,
+				lg: 0
+			};
+
 			map.addSource('people', {
 				type: 'geojson',
 				data: './data/people.geojson'
@@ -123,13 +196,12 @@
 
 				[`people-label-${group}`, `people-circle-${group}`].forEach((c) => {
 					map.on('mouseenter', c, showPopup);
-					map.on('click', c, flyToLabel);
+					map.on('click', c, flyToLabelClick);
 				});
 			});
 
 			['click', 'movestart', 'zoomstart'].forEach((e) => {
 				map.on(e, hidePopup);
-				map.on(e, resetSearchTerm);
 			});
 		});
 
@@ -137,77 +209,41 @@
 		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-left');
 		map.addControl(new maplibregl.GeolocateControl(), 'bottom-left');
 	}
-
-	onMount(async () => {
-		loadMap();
-	});
-
-	const flyToLabel = function (e) {
-		hidePopup();
-		const props = e.features[0].properties;
-		map.once('moveend', () => {
-			searchComponent.setSearchTerm(props.pref + props.munic);
-		});
-		flyTo(e.features[0].geometry.coordinates);
-	};
-
-	const resetSearchTerm = function (e) {
-		searchComponent.resetSearchTerm();
-	};
-
-	const popup = new maplibregl.Popup({
-		closeButton: false,
-		closeOnClick: true
-	});
-
-	const showPopup = function (e) {
-		map.getCanvas().style.cursor = 'pointer';
-		const coordinates = e.features[0].geometry.coordinates.slice();
-		popup.setLngLat(coordinates);
-		const prop = e.features[0].properties;
-		const content = `
-        <div class="location">${prop.pref}&nbsp;${prop.munic}</div>
-        ${addHighlight(prop.desc)}
-        <a href=${prop.url} target="_blank">Wikipedia</a>
-    `;
-		popup.setHTML(content);
-		popup.addTo(map);
-	};
-
-	const hidePopup = function () {
-		map.getCanvas().style.cursor = '';
-		popup.remove();
-	};
-
-	function addHighlight(text: string): string {
-		const index = findHighlight(text);
-		if (index == -1) {
-			return text;
-		}
-		const before = text.substring(0, index);
-		const after = text.substring(index, text.length);
-		return `<strong>${before}</strong>${after}`;
-	}
-
-	function findHighlight(text: string): number {
-		const bracket = text.indexOf('（');
-		let particle = text.indexOf('は、');
-		if (particle > -1) {
-			while (/\s/.test(text[particle - 1]) && particle > 1) {
-				particle -= 1;
-			}
-		}
-		if (bracket != -1 && particle != -1) {
-			return Math.min(bracket, particle);
-		} else {
-			return Math.max(bracket, particle);
-		}
-	}
 </script>
 
 <section>
 	<div id="map" />
-	<Search bind:this={searchComponent} />
+
+	<div id="random" on:click={flyToRandom}>
+		<i class="material-icons">flight_takeoff</i>
+		<span>どこかへ飛ぶ</span>
+	</div>
+
+	<div id="search-container">
+		<div id="search-bar">
+			<div class="icon">
+				<i class="material-icons">search</i>
+			</div>
+			<div class="input">
+				<input
+					type="text"
+					bind:value={searchTerm}
+					on:input={() => (hideSearchResults = false)}
+					placeholder="市区町村を探す"
+				/>
+			</div>
+			<div class="button" on:click={clearSearchTerm}>
+				<i class="material-icons">close</i>
+			</div>
+		</div>
+		<div id="search-results">
+			<ul>
+				{#each matchedLocations as loc}
+					<li class="search-result-item" on:click={() => flyToAndSetSearchTerm(loc)}>{loc[0]}</li>
+				{/each}
+			</ul>
+		</div>
+	</div>
 </section>
 
 <style>
