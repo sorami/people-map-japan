@@ -46,6 +46,7 @@
 	}
 
 	const showPopup = function (e) {
+		e.preventDefault();
 		const coordinates = e.features[0].geometry.coordinates;
 		popup.setLngLat(coordinates);
 		const prop = e.features[0].properties;
@@ -79,6 +80,7 @@
 	}
 
 	const flyToLabelClick = function (e) {
+		e.preventDefault();
 		hidePopup();
 		const props = e.features[0].properties;
 		setSearchTerm(props.pref + props.munic);
@@ -196,6 +198,7 @@
 
 				[`people-label-${group}`, `people-circle-${group}`].forEach((c) => {
 					map.on('mouseenter', c, showPopup);
+					map.on('touchstart', c, showPopup);
 					map.on('click', c, flyToLabelClick);
 				});
 			});
