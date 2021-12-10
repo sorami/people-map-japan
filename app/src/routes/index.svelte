@@ -2,7 +2,6 @@
 	import '../app.css';
 	import Map from '$lib/map/Map.svelte';
 	import Header from '$lib/Header.svelte';
-	import Search from '$lib/Search.svelte';
 </script>
 
 <svelte:head>
@@ -11,4 +10,3 @@
 
 <Map />
 <Header />
-<Search />

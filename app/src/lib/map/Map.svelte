@@ -12,6 +12,10 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import './popup.css';
 	import maplibregl from 'maplibre-gl';
+	import { onMount } from 'svelte';
+	import Search from '$lib/map/Search.svelte';
+
+	let searchComponent: Search;
 
 	const locationGroups = ['sm', 'md', 'lg'];
 	const circleRadiusDict = {
@@ -116,30 +120,38 @@
 					}
 				});
 
-				map.on('mouseenter', `people-label-${group}`, showPopup);
-				map.on('mouseenter', `people-circle-${group}`, showPopup);
-				map.on('click', `people-label-${group}`, flyToLabel);
-				map.on('click', `people-circle-${group}`, flyToLabel);
+				[`people-label-${group}`, `people-circle-${group}`].forEach(c => {
+					map.on('mouseenter', c, showPopup);
+					map.on('click', c, flyToLabel);	
+				})
 			});
 
-			map.on('click', hidePopup);
-			map.on('movestart', hidePopup);
-			map.on('zoomstart', hidePopup);
+			['click', 'movestart', 'zoomstart'].forEach(e => {
+				map.on(e, hidePopup);
+				map.on(e, resetSearchTerm);
+			});
 		});
 
 		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
 		map.addControl(new maplibregl.GeolocateControl(), 'bottom-right');
 	}
 
-	import { onMount } from 'svelte';
 	onMount(async () => {
 		loadMap();
 	});
 
 	const flyToLabel = function (e) {
 		hidePopup();
+		const props = e.features[0].properties;
+		map.once("moveend", () => {
+			searchComponent.setSearchTerm(props.pref + props.munic);
+		});
 		flyTo(e.features[0].geometry.coordinates);
 	};
+
+	const resetSearchTerm = function (e) {
+		searchComponent.resetSearchTerm();
+	}
 
 	const popup = new maplibregl.Popup({
 		closeButton: false,
@@ -193,6 +205,7 @@
 
 <section>
 	<div id="map" />
+	<Search bind:this={searchComponent} />
 </section>
 
 <style>
