@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	let map: maplibregl.Map;
 
-	export function flyTo(center: [number, number], zoom = 13): void {
+	export function flyTo(center: [number, number], zoom = 11): void {
 		if (map) {
 			map.flyTo({ center, zoom });
 		}
@@ -117,6 +117,7 @@
 				});
 
 				map.on('mouseenter', `people-label-${group}`, showPopup);
+				map.on('click', `people-label-${group}`, flyToLabel);
 			});
 
 			map.on('click', hidePopup);
@@ -132,6 +133,11 @@
 	onMount(async () => {
 		loadMap();
 	});
+
+	const flyToLabel = function(e) {
+		hidePopup();
+		flyTo(e.features[0].geometry.coordinates);
+	}
 
 	const popup = new maplibregl.Popup({
 		closeButton: false,
