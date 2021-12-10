@@ -1,1 +1,1 @@
-<section id="about"></section>
+<section id="about" />

@@ -120,13 +120,13 @@
 					}
 				});
 
-				[`people-label-${group}`, `people-circle-${group}`].forEach(c => {
+				[`people-label-${group}`, `people-circle-${group}`].forEach((c) => {
 					map.on('mouseenter', c, showPopup);
-					map.on('click', c, flyToLabel);	
-				})
+					map.on('click', c, flyToLabel);
+				});
 			});
 
-			['click', 'movestart', 'zoomstart'].forEach(e => {
+			['click', 'movestart', 'zoomstart'].forEach((e) => {
 				map.on(e, hidePopup);
 				map.on(e, resetSearchTerm);
 			});
@@ -143,7 +143,7 @@
 	const flyToLabel = function (e) {
 		hidePopup();
 		const props = e.features[0].properties;
-		map.once("moveend", () => {
+		map.once('moveend', () => {
 			searchComponent.setSearchTerm(props.pref + props.munic);
 		});
 		flyTo(e.features[0].geometry.coordinates);
@@ -151,7 +151,7 @@
 
 	const resetSearchTerm = function (e) {
 		searchComponent.resetSearchTerm();
-	}
+	};
 
 	const popup = new maplibregl.Popup({
 		closeButton: false,

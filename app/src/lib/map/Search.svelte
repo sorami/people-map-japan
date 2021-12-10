@@ -96,10 +96,14 @@
 		background-color: #ff8243;
 		cursor: pointer;
 	}
+	#random:active {
+		top: 1.1em;
+		box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+	}
 	#random span {
 		vertical-align: middle;
-        font-weight: bold;
-        font-family: sans-serif;
+		font-weight: bold;
+		font-family: sans-serif;
 	}
 
 	#search-container {
