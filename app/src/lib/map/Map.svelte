@@ -50,7 +50,8 @@
 			maxZoom: 13,
 			minZoom: 4,
 			bearing: 0,
-			pitch: 0
+			pitch: 0,
+			attributionControl: false
 		});
 
 		map.on('load', function () {
@@ -132,8 +133,9 @@
 			});
 		});
 
-		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
-		map.addControl(new maplibregl.GeolocateControl(), 'bottom-right');
+		map.addControl(new maplibregl.AttributionControl(), 'bottom-left');
+		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-left');
+		map.addControl(new maplibregl.GeolocateControl(), 'bottom-left');
 	}
 
 	onMount(async () => {

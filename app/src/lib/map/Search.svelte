@@ -46,7 +46,6 @@
 <div id="random" on:click={flyToRandom}>
 	<i class="material-icons">flight_takeoff</i>
 	<span>どこかへ飛ぶ</span>
-	<i class="material-icons">navigate_next</i>
 </div>
 
 <div id="search-container">
@@ -83,21 +82,25 @@
 	#random {
 		z-index: 1;
 		position: absolute;
-		top: 1em;
-		left: 0;
+		bottom: 0em;
+		right: 0;
 		margin: 2em 1em;
 		padding: 0.5em;
+		padding-right: 1em;
 		border-radius: 0.5em;
 		box-shadow: 0 4px 8px rgb(0, 0, 0, 0.5);
 		background-color: #e26a2c;
 		color: #fff;
+	}
+	#random {
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
 	}
 	#random:hover {
 		background-color: #ff8243;
 		cursor: pointer;
 	}
 	#random:active {
-		top: 1.1em;
+		bottom: -0.15em;
 		box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
 	}
 	#random span {
