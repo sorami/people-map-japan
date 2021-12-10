@@ -86,7 +86,6 @@
 		box-shadow: 0 4px 8px rgb(0, 0, 0, 0.5);
 		background-color: #e26a2c;
 		color: #fff;
-		font-weight: bold;
 	}
 	#random:hover {
 		background-color: #ff8243;
@@ -94,6 +93,8 @@
 	}
 	#random span {
 		vertical-align: middle;
+        font-weight: bold;
+        font-family: sans-serif;
 	}
 
 	#search-container {
@@ -102,8 +103,8 @@
 		top: 1em;
 		right: 0;
 		margin: 2em 1em;
-		--text-color: #333;
-		--background-color: #fff;
+		--text-color: #000;
+		--background-color: #dfdfdf;
 	}
 
 	#search-bar {
