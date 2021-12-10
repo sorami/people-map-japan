@@ -111,40 +111,45 @@
 		padding: 2em;
 	}
 
-	#modal h1, h2 {
+	#modal-content {
+		max-width: calc(100vw - 20px);
+		max-height: calc(100vh - 20px);
+		overflow: auto;
+	}
+	#modal-content h1, h2 {
 		margin: 0;
 	}
-	#modal h1 {
+	#modal-content h1 {
 		font-size: 1em;
 		margin-bottom: 1em;
 		color: #34be82;
 	}
-	#modal h1 small {
+	#modal-content h1 small {
 		color: #444;
 		font-size: 0.8em;
 		margin-left: 0.25em;
 	}
-	#modal h2 {
+	#modal-content h2 {
 		font-size: 0.9em;
 		margin-top: 1.5em;
 		margin-bottom: 0.5em;
 	}
 
-	#modal p {
+	#modal-content p {
 		margin: 0;
 		margin-bottom: 0.5em;
 		line-height: 1.5;
 		font-size: 0.8em;
 	}
-	#modal a {
+	#modal-content a {
 		color: #444;
 	}
-	#modal a:hover {
+	#modal-content a:hover {
 		color: #34be82;
 		text-decoration: none;
 	}
 
-	#modal p.last {
+	#modal-content p.last {
 		font-style: italic;
 		text-align: right;
 	}
