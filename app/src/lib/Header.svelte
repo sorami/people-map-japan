@@ -54,7 +54,7 @@
 		color: #34be82;
 		font-size: 1.2em;
 		font-weight: bold;
-		font-family: serif;
+		font-family: sans-serif;
 		padding: 0;
 		margin: 0;
 		opacity: 0.85;
