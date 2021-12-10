@@ -117,7 +117,9 @@
 				});
 
 				map.on('mouseenter', `people-label-${group}`, showPopup);
+				map.on('mouseenter', `people-circle-${group}`, showPopup);
 				map.on('click', `people-label-${group}`, flyToLabel);
+				map.on('click', `people-circle-${group}`, flyToLabel);
 			});
 
 			map.on('click', hidePopup);
