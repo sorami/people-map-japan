@@ -125,8 +125,8 @@
 			map.on('zoomstart', hidePopup);
 		});
 
-		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
-		map.addControl(new maplibregl.GeolocateControl());
+		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+		map.addControl(new maplibregl.GeolocateControl(), 'bottom-right');
 	}
 
 	import { onMount } from 'svelte';
