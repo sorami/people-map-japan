@@ -53,7 +53,7 @@
 				<a href="https://pudding.cool/" target="_blank" rel="noreferrer">The Pudding</a>!
 			</p>
 
-			<h2>データとコード</h2>
+			<h2>Data & Code</h2>
 			<p>
 				<a
 					href="https://ja.wikipedia.org/wiki/%E5%87%BA%E8%BA%AB%E5%88%A5%E3%81%AE%E4%BA%BA%E5%90%8D%E8%A8%98%E4%BA%8B%E4%B8%80%E8%A6%A7%E3%81%AE%E4%B8%80%E8%A6%A7#%E6%97%A5%E6%9C%AC%E3%81%AE%E5%9C%B0%E5%9F%9F%EF%BC%88%E9%83%BD%E9%81%93%E5%BA%9C%E7%9C%8C%E3%80%81%E5%B8%82%E7%94%BA%E6%9D%91%EF%BC%89"
