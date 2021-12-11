@@ -31,15 +31,15 @@
 			<h1>A People Map of Japan <small>by <a href="https://sorami.dev" target="_blank" rel="noreferrer">sorami.dev</a></small></h1>
 			<p>「地名」を「出身人物名」に置き換えた地図です。</p>
 			<p>円の大きさはWikipediaページのアクセス数を表しています。</p>
+			<h2>Inspired by The Pudding</h2>
 			<p>
-				<a href="https://pudding.cool/" target="_blank" rel="noreferrer">The Pudding</a>による<a
+				これは<a href="https://pudding.cool/" target="_blank" rel="noreferrer">The Pudding</a>による<a
 					href="https://pudding.cool/2019/05/people-map/"
 					target="_blank"
 					rel="noreferrer">US版</a
 				>、<a href="https://pudding.cool/2019/06/people-map-uk/" target="_blank" rel="noreferrer"
 					>UK版</a
-				>をもとにしています。彼らの了承を得て、独自に作成した日本版です。People
-				Mapのアイデア自体はThe Puddingによるものです。
+				>のアイデアをもとに、彼らの了承を得て独自に作成した日本版です。
 			</p>
 			<p>
 				A Japanese version of The Pudding's <a
@@ -62,9 +62,9 @@
 				>のデータから、各市区町村の出身者のうち、年間（2020年12月-2021年11月）で最もアクセス数の多かった人物（ページ）を選択しています。
 			</p>
 			<p>
-				地図データ（ベクトルタイル）には<a href="https://openstreetmap.jp/" target="_blank" rel="noreferrer"
+				背景地図には<a href="https://openstreetmap.jp/" target="_blank" rel="noreferrer"
 					>OpenStreetMap</a
-				>を利用しています。各市区町村の緯度経度を算出するためには<a
+				>のベクトルタイルを利用しています。各市区町村の緯度経度を算出するためには<a
 					href="https://nlftp.mlit.go.jp/index.html"
 					target="_blank"
 					rel="noreferrer">国土交通省「位置参照情報」</a
@@ -129,6 +129,7 @@
 		margin: 0;
 	}
 	#modal-content h1 {
+		text-align: center;
 		font-size: 1em;
 		margin-bottom: 1em;
 		color: #34be82;
