@@ -28,7 +28,7 @@
 <section id="top-modal" class:visible bind:this={topModal} on:click={() => close()}>
 	<div id="modal">
 		<div id="modal-content">
-			<h1>A People Map of Japan <small>Inspired by The Pudding</small></h1>
+			<h1>A People Map of Japan <small>by <a href="https://sorami.dev" target="_blank" rel="noreferrer">sorami.dev</a></small></h1>
 			<p>「地名」を「出身人物名」に置き換えた地図です。</p>
 			<p>円の大きさはWikipediaページのアクセス数を表しています。</p>
 			<p>
@@ -62,9 +62,9 @@
 				>のデータから、各市区町村の出身者のうち、年間（2020年12月-2021年11月）で最もアクセス数の多かった人物（ページ）を選択しています。
 			</p>
 			<p>
-				地図データには<a href="https://openstreetmap.jp/" target="_blank" rel="noreferrer"
+				地図データ（ベクトルタイル）には<a href="https://openstreetmap.jp/" target="_blank" rel="noreferrer"
 					>OpenStreetMap</a
-				>を利用しています。また、各市区町村の緯度経度を算出するために<a
+				>を利用しています。各市区町村の緯度経度を算出するためには<a
 					href="https://nlftp.mlit.go.jp/index.html"
 					target="_blank"
 					rel="noreferrer">国土交通省「位置参照情報」</a
@@ -79,11 +79,11 @@
 				>を使いました。
 			</p>
 			<p>
-				全てのデータとコードは <a
+				全てのデータとコードは<a
 					href="https://github.com/sorami/people-map-japan"
 					target="_blank"
 					rel="noreferrer">GitHub</a
-				> で公開しています。詳細はそちらをご覧ください。
+				>で公開しています。詳細はそちらをご覧ください。
 			</p>
 		</div>
 	</div>
@@ -137,6 +137,9 @@
 		color: #aaa;
 		font-size: 0.8em;
 		margin-left: 0.25em;
+	}
+	#modal-content h1 small a {
+		color: #aaa;
 	}
 	#modal-content h2 {
 		font-size: 0.9em;
