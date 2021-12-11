@@ -1,4 +1,6 @@
 <script context="module" lang="ts">
+	import 'material-design-icons/iconfont/material-icons.css';
+
 	let modal = {};
 
 	export function getModal() {
@@ -27,6 +29,9 @@
 
 <section id="top-modal" class:visible bind:this={topModal} on:click={() => close()}>
 	<div id="modal">
+		<div id="modal-close" on:click={() => close()}>
+			<i class="material-icons">cancel</i>
+		</div>
 		<div id="modal-content">
 			<h1>A People Map of Japan <small>by <a href="https://sorami.dev" target="_blank" rel="noreferrer">sorami.dev</a></small></h1>
 			<p>「地名」を「出身人物名」に置き換えた地図です。</p>
@@ -117,6 +122,17 @@
 		background: #444;
 		filter: drop-shadow(10px 10px 10px #1118);
 		padding: 2em;
+	}
+
+	#modal-close {
+		position: absolute;
+		top: -0.5em;
+		right: -0.5em;
+		color: #eee;
+		opacity: 0.75;
+	}
+	#modal-close:hover {
+		cursor: pointer;
 	}
 
 	#modal-content {
