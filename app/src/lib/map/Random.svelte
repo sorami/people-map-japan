@@ -12,7 +12,7 @@
 </script>
 
 <div id="random" on:click={selectRandom}>
-	<i class="material-icons">flight_takeoff</i>
+	<i class="material-icons">flight</i>
 	<span>どこかへ飛ぶ</span>
 </div>
 
