@@ -3,7 +3,8 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import './popup.css';
 	import './search.css';
-	import './random.css';
+
+	import Random from './Random.svelte';
 
 	import maplibregl from 'maplibre-gl';
 	import { onMount } from 'svelte';
@@ -72,11 +73,6 @@
 	function flyToAndSetSearchTerm(loc: Location): void {
 		flyTo(loc[1]);
 		setSearchTerm(loc[0]);
-	}
-
-	function flyToRandom(): void {
-		const selected = locations[Math.floor(Math.random() * locations.length)];
-		flyToAndSetSearchTerm(selected);
 	}
 
 	const flyToLabelClick = function (e) {
@@ -212,15 +208,15 @@
 		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-left');
 		map.addControl(new maplibregl.GeolocateControl(), 'bottom-left');
 	}
+
+	function flyToRandom(event) {
+		const location = event.detail;
+		flyToAndSetSearchTerm(location);
+	}
 </script>
 
 <section>
 	<div id="map" />
-
-	<div id="random" on:click={flyToRandom}>
-		<i class="material-icons">flight_takeoff</i>
-		<span>どこかへ飛ぶ</span>
-	</div>
 
 	<div id="search-container">
 		<div id="search-bar">
@@ -247,6 +243,8 @@
 			</ul>
 		</div>
 	</div>
+
+	<Random {locations} on:click={flyToRandom} />
 </section>
 
 <style>
