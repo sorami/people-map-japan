@@ -1,31 +1,20 @@
 <script lang="ts">
 	import 'material-design-icons/iconfont/material-icons.css';
 	import 'maplibre-gl/dist/maplibre-gl.css';
-	import './popup.css';
-	import './search.css';
-
-	import Random from './Random.svelte';
+	import './map.css';
 
 	import maplibregl from 'maplibre-gl';
 	import { onMount } from 'svelte';
 	import { addHighlight } from './utils';
 
-	type Location = [string, [number, number]]; // [name, [lon, lat]]
+	import Search from './Search.svelte';
+	import Random from './Random.svelte';
 
 	let map: maplibregl.Map;
 	let popup: maplibregl.Popup;
-	let locations: Location[] = [];
-	let matchedLocations: Location[] = [];
+	let locations: Loc[] = [];
 	let searchTerm = '';
 	let hideSearchResults = false;
-
-	$: {
-		if (searchTerm === '' || hideSearchResults) {
-			matchedLocations = [];
-		} else {
-			matchedLocations = locations.filter((loc) => loc[0].includes(searchTerm));
-		}
-	}
 
 	onMount(async () => {
 		loadMap();
@@ -35,16 +24,6 @@
 			.then((data) => (locations = data))
 			.catch((e) => console.error(e));
 	});
-
-	function setSearchTerm(text: string): void {
-		searchTerm = text;
-		hideSearchResults = true;
-	}
-
-	function clearSearchTerm(): void {
-		searchTerm = '';
-		hideSearchResults = false;
-	}
 
 	const showPopup = function (e) {
 		e.preventDefault();
@@ -64,6 +43,11 @@
 		popup.remove();
 	};
 
+	function setSearchTerm(text: string): void {
+		searchTerm = text;
+		hideSearchResults = true;
+	}
+
 	function flyTo(center: [number, number], zoom = 11): void {
 		if (map) {
 			map.flyTo({ center, zoom });
@@ -82,6 +66,11 @@
 		setSearchTerm(props.pref + props.munic);
 		flyTo(e.features[0].geometry.coordinates);
 	};
+
+	function flyToRandom(event) {
+		const location = event.detail;
+		flyToAndSetSearchTerm(location);
+	}
 
 	function loadMap(): void {
 		map = new maplibregl.Map({
@@ -208,42 +197,11 @@
 		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-left');
 		map.addControl(new maplibregl.GeolocateControl(), 'bottom-left');
 	}
-
-	function flyToRandom(event) {
-		const location = event.detail;
-		flyToAndSetSearchTerm(location);
-	}
 </script>
 
 <section>
 	<div id="map" />
-
-	<div id="search-container">
-		<div id="search-bar">
-			<div class="icon">
-				<i class="material-icons">search</i>
-			</div>
-			<div class="input">
-				<input
-					type="text"
-					bind:value={searchTerm}
-					on:input={() => (hideSearchResults = false)}
-					placeholder="市区町村を探す"
-				/>
-			</div>
-			<div class="button" on:click={clearSearchTerm}>
-				<i class="material-icons">close</i>
-			</div>
-		</div>
-		<div id="search-results">
-			<ul>
-				{#each matchedLocations as loc}
-					<li class="search-result-item" on:click={() => flyToAndSetSearchTerm(loc)}>{loc[0]}</li>
-				{/each}
-			</ul>
-		</div>
-	</div>
-
+	<Search {locations} {searchTerm} {hideSearchResults} {flyToAndSetSearchTerm} />
 	<Random {locations} on:click={flyToRandom} />
 </section>
 
