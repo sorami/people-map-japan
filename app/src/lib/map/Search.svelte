@@ -27,9 +27,9 @@
 		showSearchResults = false;
 	}
 
-	export function setSearchTermAndFly(loc: Loc): void {
+	export function setSearchTermAndFly(loc: Loc, zoom: number): void {
 		setSearchTerm(loc[0]);
-		flyTo(loc[1]);
+		flyTo(loc[1], zoom);
 	}
 </script>
 
@@ -54,7 +54,7 @@
 		{#if showSearchResults}
 			<ul>
 				{#each matchedLocations as loc}
-					<li class="search-result-item" on:click={() => setSearchTermAndFly(loc)}>{loc[0]}</li>
+					<li class="search-result-item" on:click={() => setSearchTermAndFly(loc, 11)}>{loc[0]}</li>
 				{/each}
 			</ul>
 		{/if}

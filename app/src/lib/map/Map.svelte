@@ -24,7 +24,7 @@
 			.catch((e) => console.error(e));
 	});
 
-	function flyTo(center: [number, number], zoom = 11): void {
+	function flyTo(center: [number, number], zoom: number): void {
 		if (map) {
 			map.flyTo({ center, zoom });
 		}
@@ -36,12 +36,12 @@
 		const props = e.features[0].properties;
 		const locName = props.pref + props.munic;
 		const coords =  e.features[0].geometry.coordinates;
-		searchComponent.setSearchTermAndFly([locName, coords]);
+		searchComponent.setSearchTermAndFly([locName, coords], 11);
 	};
 
 	function flyToRandom(event) {
 		const loc = event.detail;
-		searchComponent.setSearchTermAndFly(loc);
+		searchComponent.setSearchTermAndFly(loc, 10);
 	}
 
 	const showPopup = function (e) {
