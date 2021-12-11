@@ -13,8 +13,7 @@
 	let map: maplibregl.Map;
 	let popup: maplibregl.Popup;
 	let locations: Loc[] = [];
-	let searchTerm = '';
-	let hideSearchResults = false;
+	let searchComponent: Search;
 
 	onMount(async () => {
 		loadMap();
@@ -24,6 +23,26 @@
 			.then((data) => (locations = data))
 			.catch((e) => console.error(e));
 	});
+
+	function flyTo(center: [number, number], zoom = 11): void {
+		if (map) {
+			map.flyTo({ center, zoom });
+		}
+	}
+
+	const flyToLabelClick = function (e) {
+		e.preventDefault();
+		hidePopup();
+		const props = e.features[0].properties;
+		const locName = props.pref + props.munic;
+		const coords =  e.features[0].geometry.coordinates;
+		searchComponent.setSearchTermAndFly([locName, coords]);
+	};
+
+	function flyToRandom(event) {
+		const loc = event.detail;
+		searchComponent.setSearchTermAndFly(loc);
+	}
 
 	const showPopup = function (e) {
 		e.preventDefault();
@@ -43,35 +62,6 @@
 		popup.remove();
 	};
 
-	function setSearchTerm(text: string): void {
-		searchTerm = text;
-		hideSearchResults = true;
-	}
-
-	function flyTo(center: [number, number], zoom = 11): void {
-		if (map) {
-			map.flyTo({ center, zoom });
-		}
-	}
-
-	function flyToAndSetSearchTerm(loc: Location): void {
-		flyTo(loc[1]);
-		setSearchTerm(loc[0]);
-	}
-
-	const flyToLabelClick = function (e) {
-		e.preventDefault();
-		hidePopup();
-		const props = e.features[0].properties;
-		setSearchTerm(props.pref + props.munic);
-		flyTo(e.features[0].geometry.coordinates);
-	};
-
-	function flyToRandom(event) {
-		const location = event.detail;
-		flyToAndSetSearchTerm(location);
-	}
-
 	function loadMap(): void {
 		map = new maplibregl.Map({
 			container: 'map',
@@ -88,11 +78,6 @@
 			bearing: 0,
 			pitch: 0,
 			attributionControl: false
-		});
-
-		popup = new maplibregl.Popup({
-			closeButton: false,
-			closeOnClick: true
 		});
 
 		map.on('load', function () {
@@ -196,12 +181,17 @@
 		map.addControl(new maplibregl.AttributionControl(), 'bottom-left');
 		map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-left');
 		map.addControl(new maplibregl.GeolocateControl(), 'bottom-left');
+
+		popup = new maplibregl.Popup({
+			closeButton: false,
+			closeOnClick: true
+		});
 	}
 </script>
 
 <section>
 	<div id="map" />
-	<Search {locations} {searchTerm} {hideSearchResults} {flyToAndSetSearchTerm} />
+	<Search {locations} {flyTo} bind:this={searchComponent} />
 	<Random {locations} on:click={flyToRandom} />
 </section>
 

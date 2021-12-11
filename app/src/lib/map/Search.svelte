@@ -2,29 +2,34 @@
 	import './search.css';
 
 	export let locations: Loc[];
-	export let searchTerm: string;
-	export let hideSearchResults: boolean;
-	export let flyToAndSetSearchTerm;
+	export let flyTo;
+
+	let searchTerm = '';
+	let showSearchResults = true;
 
 	let matchedLocations: Loc[] = [];
 
 	$: {
-		if (searchTerm === '' || hideSearchResults) {
+		if (searchTerm === '') {
 			matchedLocations = [];
 		} else {
 			matchedLocations = locations.filter((loc) => loc[0].includes(searchTerm));
 		}
 	}
 
-	function flyTo(loc): void {
-		searchTerm = loc[0];
-		hideSearchResults = true;
-		flyToAndSetSearchTerm(loc);
-	}
-
 	function clearSearchTerm(): void {
 		searchTerm = '';
-		hideSearchResults = false;
+		showSearchResults = true;
+	}
+
+	function setSearchTerm(text: string): void {
+		searchTerm = text;
+		showSearchResults = false;
+	}
+
+	export function setSearchTermAndFly(loc: Loc): void {
+		setSearchTerm(loc[0]);
+		flyTo(loc[1]);
 	}
 </script>
 
@@ -37,7 +42,7 @@
 			<input
 				type="text"
 				bind:value={searchTerm}
-				on:input={() => (hideSearchResults = false)}
+				on:input={() => (showSearchResults = true)}
 				placeholder="市区町村を探す"
 			/>
 		</div>
@@ -46,10 +51,12 @@
 		</div>
 	</div>
 	<div id="search-results">
-		<ul>
-			{#each matchedLocations as loc}
-				<li class="search-result-item" on:click={() => flyTo(loc)}>{loc[0]}</li>
-			{/each}
-		</ul>
+		{#if showSearchResults}
+			<ul>
+				{#each matchedLocations as loc}
+					<li class="search-result-item" on:click={() => setSearchTermAndFly(loc)}>{loc[0]}</li>
+				{/each}
+			</ul>
+		{/if}
 	</div>
 </div>
