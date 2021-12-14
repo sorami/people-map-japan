@@ -25,10 +25,6 @@
 	<meta name="twitter:creator" content="@sorami" />
 	<meta name="twitter:title" content="A People Map of Japan" />
 	<meta name="twitter:description" content="地名を出身人物に置き換えた地図" />
-	<meta
-		name="twitter:image:src"
-		content="https://sorami.dev/2021/people-map-japan/img/social-twitter.png"
-	/>
 </svelte:head>
 
 <Map />
