@@ -47,7 +47,7 @@
 					>US版</a
 				>、<a href="https://pudding.cool/2019/06/people-map-uk/" target="_blank" rel="noreferrer"
 					>UK版</a
-				>のアイデアをもとに、彼らの了承を得て独自に作成した日本版です。
+				>をもとに、彼らの了承を得て独自に作成した日本版です。元のアイデアはThe Puddingによるものです。
 			</p>
 			<p>
 				A Japanese version of The Pudding's <a
