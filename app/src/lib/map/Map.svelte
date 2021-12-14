@@ -36,11 +36,14 @@
 
 	const flyToLabelClick = function (e) {
 		e.preventDefault();
-		hidePopup();
 		const props = e.features[0].properties;
 		const locName = props.pref + props.munic;
 		const coords = e.features[0].geometry.coordinates;
 		searchComponent.setSearchTermAndFly([locName, coords, true], 11);
+
+		map.once("moveend", () => {
+			showPopup(coords, props);
+		});
 	};
 
 	function flyToRandom(event) {
@@ -48,21 +51,25 @@
 		searchComponent.setSearchTermAndFly(loc, 10);
 	}
 
-	const showPopup = function (e) {
+	const showPopupFromEvent = function (e) {
 		if (e.type === 'touchstart' && map.getZoom() < 10) return;
 		e.preventDefault();
 
-		const coordinates = e.features[0].geometry.coordinates;
-		popup.setLngLat(coordinates);
-		const prop = e.features[0].properties;
+		const coords = e.features[0].geometry.coordinates;
+		const props = e.features[0].properties;
+		showPopup(coords, props);
+	};
+
+	const showPopup = function(coords, props) {
+		popup.setLngLat(coords);
 		const content = `
-			<div class="location">${prop.pref}&nbsp;${prop.munic}</div>
-			${addHighlight(prop.desc)}
-			<a href=${prop.url} target="_blank">Wikipedia</a>
+			<div class="location">${props.pref}&nbsp;${props.munic}</div>
+			${addHighlight(props.desc)}
+			<a href=${props.url} target="_blank">Wikipedia</a>
 		`;
 		popup.setHTML(content);
 		popup.addTo(map);
-	};
+	}
 
 	const hidePopup = function () {
 		popup.remove();
@@ -183,8 +190,8 @@
 				});
 
 				[`people-label-${group}`, `people-circle-${group}`].forEach((c) => {
-					map.on('mouseenter', c, showPopup);
-					map.on('touchstart', c, showPopup);
+					map.on('mouseenter', c, showPopupFromEvent);
+					map.on('touchstart', c, showPopupFromEvent);
 					map.on('click', c, flyToLabelClick);
 				});
 			});
