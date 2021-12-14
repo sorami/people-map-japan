@@ -19,7 +19,7 @@
 	onMount(async () => {
 		loadMap();
 
-		fetch('/data/locations.json')
+		fetch('./data/locations.json')
 			.then((res) => res.json())
 			.then((data) => {
 				locations = data;
@@ -70,7 +70,7 @@
 		map = new maplibregl.Map({
 			container: 'map',
 			hash: false,
-			style: '/mapstyle.json',
+			style: './mapstyle.json',
 			center: [139.767144, 35.680621],
 			maxBounds: [
 				[110, 20],
