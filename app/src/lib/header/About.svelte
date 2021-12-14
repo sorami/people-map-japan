@@ -71,8 +71,8 @@
 			</p>
 			<p>
 				背景地図には<a href="https://openstreetmap.jp/" target="_blank" rel="noreferrer"
-					>OpenStreetMap</a
-				>のベクトルタイルを利用しています。各市区町村の緯度経度を算出するためには<a
+					>OpenStreetMap Japan</a
+				>の提供するベクトルタイルを利用しています。各市区町村の緯度経度を算出するためには<a
 					href="https://nlftp.mlit.go.jp/index.html"
 					target="_blank"
 					rel="noreferrer">国土交通省「位置参照情報」</a
