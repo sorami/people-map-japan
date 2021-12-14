@@ -86,20 +86,20 @@
 		map.on('load', function () {
 			const locationGroups = ['sm', 'md', 'lg'];
 			const circleRadiusDict = {
-				sm: 5,
+				sm: 7.5,
 				md: 15,
 				lg: 30
 			};
 			const labelSizeDict = {
 				na: 0.8,
 				sm: 0.9,
-				md: 1,
-				lg: 1.2
+				md: 1.1,
+				lg: 1.3
 			};
 			const labelMinZoomDict = {
 				na: 9,
-				sm: 6,
-				md: 5,
+				sm: 0,
+				md: 0,
 				lg: 0
 			};
 
@@ -135,8 +135,8 @@
 					filter: ['==', 'group', group],
 					paint: {
 						'circle-color': '#34BE82',
-						'circle-radius': circleRadiusDict[group],
-						'circle-opacity': ['interpolate', ['linear'], ['zoom'], 4, 0.01, 13, 1]
+						'circle-radius': ['interpolate', ['linear'], ['zoom'], 6, circleRadiusDict[group] * 0.35, 13, circleRadiusDict[group]],
+						'circle-opacity': ['interpolate', ['linear'], ['zoom'], 6, 0.25, 12, 1]
 					}
 				});
 
