@@ -1,10 +1,11 @@
 # A People Map of Japan
 
-A Japanese version of [A People Map of the US](https://pudding.cool/2019/05/people-map/); This is not my idea, all credit goes to the awesome team at [The Pudding](https://pudding.cool/).
+A Japanese version of [A People Map of the US](https://pudding.cool/2019/05/people-map/); This is not my idea, all credit goes to the awesome team at [The Pudding](https://pudding.cool/)!
 
 - https://github.com/the-pudding/people-map
 - https://github.com/the-pudding/people-map-uk
 
+Built with [MapLibre GL JS](https://maplibre.org/) and [SvelteKit](https://kit.svelte.dev/).
 
 ## Data Sources
 
@@ -16,3 +17,6 @@ A Japanese version of [A People Map of the US](https://pudding.cool/2019/05/peop
   - To calculate the coordinates of municipalities
   - [国土交通省「位置参照情報」](https://nlftp.mlit.go.jp/index.html) （2021年12月1日取得）をもとに作成
   - => `preparation/data/pref_munic_coords.json`
+- [OpenStreetMap Japan](https://openstreetmap.jp/)
+  - Vector tiles: https://tile.openstreetmap.jp/
+- [Material Icons by Google](https://google.github.io/material-design-icons/)
