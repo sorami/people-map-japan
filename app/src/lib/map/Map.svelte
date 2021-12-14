@@ -129,8 +129,8 @@
 				}
 			});
 
+			// Add circles first
 			locationGroups.forEach((group) => {
-				// A person, circle
 				map.addLayer({
 					id: `people-circle-${group}`,
 					type: 'circle',
@@ -150,8 +150,10 @@
 						'circle-opacity': ['interpolate', ['linear'], ['zoom'], 6, 0.25, 12, 1]
 					}
 				});
+			});
 
-				// A person, label
+			// Add labels, after cirlcles
+			locationGroups.forEach((group) => {
 				map.addLayer({
 					id: `people-label-${group}`,
 					type: 'symbol',
