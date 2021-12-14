@@ -34,6 +34,10 @@
 		name="twitter:description"
 		content="地名を出身人物に置き換えた地図: 市区町村ごとに、Wikipediaでアクセス数の最も多かったページを選択し日本地図上に配置"
 	/>
+	<meta
+		name="twitter:image"
+		content="https://sorami.dev/2021/people-map-japan/img/social-ogp.png"
+	/>
 </svelte:head>
 
 <Map />
