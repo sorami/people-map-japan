@@ -49,8 +49,8 @@
 	}
 
 	const showPopup = function (e) {
-		e.preventDefault();
 		if ((e.type === 'touchstart') && (map.getZoom() < 10)) return;
+		e.preventDefault();
 
 		const coordinates = e.features[0].geometry.coordinates;
 		popup.setLngLat(coordinates);
