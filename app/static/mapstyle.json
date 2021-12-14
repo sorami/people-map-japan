@@ -16,7 +16,7 @@
 		{
 			"id": "background",
 			"type": "background",
-			"paint": { "background-color": "#082032" }
+			"paint": { "background-color": "#071c2d" }
 		},
 		{
 			"id": "water",
@@ -38,8 +38,8 @@
 			"paint": {
 				"line-color": "#152D35",
 				"line-opacity": ["interpolate", ["linear"], ["zoom"], 10, 0.75, 16, 1],
-				"line-dasharray": [3, 1, 1],
-				"line-width": 2
+				"line-dasharray": [1, 1, 1],
+				"line-width": 3
 			}
 		}
 	],
