@@ -33,15 +33,18 @@
 			<i class="material-icons">cancel</i>
 		</div>
 		<div id="modal-content">
-			<h1>A People Map of Japan <small>by <a href="https://sorami.dev" target="_blank" rel="noreferrer">sorami.dev</a></small></h1>
+			<h1>
+				A People Map of Japan <small
+					>by <a href="https://sorami.dev" target="_blank" rel="noreferrer">sorami.dev</a></small
+				>
+			</h1>
 			<p>「地名」を「出身人物名」に置き換えた地図です。</p>
 			<p>円の大きさはWikipediaページのアクセス数を表しています。</p>
 			<h2>Inspired by The Pudding</h2>
 			<p>
-				これは<a href="https://pudding.cool/" target="_blank" rel="noreferrer">The Pudding</a>による<a
-					href="https://pudding.cool/2019/05/people-map/"
-					target="_blank"
-					rel="noreferrer">US版</a
+				これは<a href="https://pudding.cool/" target="_blank" rel="noreferrer">The Pudding</a
+				>による<a href="https://pudding.cool/2019/05/people-map/" target="_blank" rel="noreferrer"
+					>US版</a
 				>、<a href="https://pudding.cool/2019/06/people-map-uk/" target="_blank" rel="noreferrer"
 					>UK版</a
 				>のアイデアをもとに、彼らの了承を得て独自に作成した日本版です。

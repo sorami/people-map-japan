@@ -23,8 +23,9 @@
 			.then((res) => res.json())
 			.then((data) => {
 				locations = data;
-				locationsWithPerson = locations.filter(loc => loc[2]);
-			}).catch((e) => console.error(e));
+				locationsWithPerson = locations.filter((loc) => loc[2]);
+			})
+			.catch((e) => console.error(e));
 	});
 
 	function flyTo(center: [number, number], zoom: number): void {
@@ -38,7 +39,7 @@
 		hidePopup();
 		const props = e.features[0].properties;
 		const locName = props.pref + props.munic;
-		const coords =  e.features[0].geometry.coordinates;
+		const coords = e.features[0].geometry.coordinates;
 		searchComponent.setSearchTermAndFly([locName, coords, true], 11);
 	};
 
@@ -135,7 +136,15 @@
 					filter: ['==', 'group', group],
 					paint: {
 						'circle-color': '#34BE82',
-						'circle-radius': ['interpolate', ['linear'], ['zoom'], 6, circleRadiusDict[group] * 0.35, 13, circleRadiusDict[group]],
+						'circle-radius': [
+							'interpolate',
+							['linear'],
+							['zoom'],
+							6,
+							circleRadiusDict[group] * 0.35,
+							13,
+							circleRadiusDict[group]
+						],
 						'circle-opacity': ['interpolate', ['linear'], ['zoom'], 6, 0.25, 12, 1]
 					}
 				});
