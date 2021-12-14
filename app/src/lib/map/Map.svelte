@@ -52,9 +52,6 @@
 	}
 
 	const showPopupFromEvent = function (e) {
-		if (e.type === 'touchstart' && map.getZoom() < 10) return;
-		e.preventDefault();
-
 		const coords = e.features[0].geometry.coordinates;
 		const props = e.features[0].properties;
 		showPopup(coords, props);
@@ -191,7 +188,6 @@
 
 				[`people-label-${group}`, `people-circle-${group}`].forEach((c) => {
 					map.on('mouseenter', c, showPopupFromEvent);
-					map.on('touchstart', c, showPopupFromEvent);
 					map.on('click', c, flyToLabelClick);
 				});
 			});
