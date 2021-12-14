@@ -3,10 +3,10 @@
 
 	const dispatch = createEventDispatcher();
 
-	export let locations;
+	export let locationsWithPerson;
 
 	function selectRandom(): void {
-		const selected = locations[Math.floor(Math.random() * locations.length)];
+		const selected = locationsWithPerson[Math.floor(Math.random() * locationsWithPerson.length)];
 		dispatch('click', selected);
 	}
 </script>

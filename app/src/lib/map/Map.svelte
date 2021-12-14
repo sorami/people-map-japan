@@ -13,6 +13,7 @@
 	let map: maplibregl.Map;
 	let popup: maplibregl.Popup;
 	let locations: Loc[] = [];
+	let locationsWithPerson: Loc[] = [];
 	let searchComponent: Search;
 
 	onMount(async () => {
@@ -20,8 +21,10 @@
 
 		fetch('/data/locations.json')
 			.then((res) => res.json())
-			.then((data) => (locations = data))
-			.catch((e) => console.error(e));
+			.then((data) => {
+				locations = data;
+				locationsWithPerson = locations.filter(loc => loc[2]);
+			}).catch((e) => console.error(e));
 	});
 
 	function flyTo(center: [number, number], zoom: number): void {
@@ -36,7 +39,7 @@
 		const props = e.features[0].properties;
 		const locName = props.pref + props.munic;
 		const coords =  e.features[0].geometry.coordinates;
-		searchComponent.setSearchTermAndFly([locName, coords], 11);
+		searchComponent.setSearchTermAndFly([locName, coords, true], 11);
 	};
 
 	function flyToRandom(event) {
@@ -192,7 +195,7 @@
 <section>
 	<div id="map" />
 	<Search {locations} {flyTo} bind:this={searchComponent} />
-	<Random {locations} on:click={flyToRandom} />
+	<Random {locationsWithPerson} on:click={flyToRandom} />
 </section>
 
 <style>
