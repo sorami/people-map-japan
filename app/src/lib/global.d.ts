@@ -1,1 +1,7 @@
-type Loc = [string, [number, number], boolean]; // [name, [lon, lat], hasPerson]
+interface Loc {
+	pref: string;
+	munic: string;
+	coords: [number, number];
+	desc?: string;
+	url?: string;
+}

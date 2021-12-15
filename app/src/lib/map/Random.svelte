@@ -3,15 +3,16 @@
 
 	const dispatch = createEventDispatcher();
 
-	export let locationsWithPerson;
+	export let locationNamesWithPerson;
 
-	function selectRandom(): void {
-		const selected = locationsWithPerson[Math.floor(Math.random() * locationsWithPerson.length)];
+	function selectRandomLocName(): void {
+		const selected =
+			locationNamesWithPerson[Math.floor(Math.random() * locationNamesWithPerson.length)];
 		dispatch('click', selected);
 	}
 </script>
 
-<div id="random" on:click={selectRandom}>
+<div id="random" on:click={selectRandomLocName}>
 	<i class="material-icons">flight</i>
 	<span>どこかへ飛ぶ</span>
 </div>

@@ -1,23 +1,26 @@
 <script lang="ts">
 	import './search.css';
 
-	export let locations: Loc[];
+	export let locations: { [key: string]: Loc };
 	export let flyTo;
+	export let showPopup;
 
 	let searchTerm = '';
 	let showSearchResults = true;
 
-	let matchedLocations: Loc[] = [];
+	let matchedLocationList: Loc[] = [];
 
 	$: {
 		if (searchTerm === '') {
-			matchedLocations = [];
+			matchedLocationList = [];
 		} else {
-			matchedLocations = locations.filter((loc) => loc[0].includes(searchTerm));
+			matchedLocationList = Object.entries(locations)
+				.filter(([locName, loc]) => locName.includes(searchTerm))
+				.map(([locName, loc]) => loc);
 		}
 	}
 
-	function clearSearchTerm(): void {
+	export function clearSearchTerm(): void {
 		searchTerm = '';
 		showSearchResults = true;
 	}
@@ -27,9 +30,10 @@
 		showSearchResults = false;
 	}
 
-	export function setSearchTermAndFly(loc: Loc, zoom: number): void {
-		setSearchTerm(loc[0]);
-		flyTo(loc[1], zoom);
+	export function flyToLoc(loc: Loc, zoom: number): void {
+		setSearchTerm(loc.pref + loc.munic);
+		flyTo(loc.coords, zoom);
+		showPopup(loc);
 	}
 </script>
 
@@ -53,8 +57,10 @@
 	<div id="search-results">
 		{#if showSearchResults}
 			<ul>
-				{#each matchedLocations as loc}
-					<li class="search-result-item" on:click={() => setSearchTermAndFly(loc, 11)}>{loc[0]}</li>
+				{#each matchedLocationList as loc}
+					<li class="search-result-item" on:click={() => flyToLoc(loc, 11)}>
+						{loc.pref + loc.munic}
+					</li>
 				{/each}
 			</ul>
 		{/if}

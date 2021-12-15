@@ -12,8 +12,8 @@
 
 	let map: maplibregl.Map;
 	let popup: maplibregl.Popup;
-	let locations: Loc[] = [];
-	let locationsWithPerson: Loc[] = [];
+	let locations: { [key: string]: Loc } = {};
+	let locationNamesWithPerson: string[];
 	let searchComponent: Search;
 
 	onMount(async () => {
@@ -23,7 +23,9 @@
 			.then((res) => res.json())
 			.then((data) => {
 				locations = data;
-				locationsWithPerson = locations.filter((loc) => loc[2]);
+				locationNamesWithPerson = Object.entries(locations)
+					.filter(([locName, loc]) => loc.desc)
+					.map(([locName, loc]) => locName);
 			})
 			.catch((e) => console.error(e));
 	});
@@ -38,35 +40,38 @@
 		e.preventDefault();
 		const props = e.features[0].properties;
 		const locName = props.pref + props.munic;
-		const coords = e.features[0].geometry.coordinates;
-		searchComponent.setSearchTermAndFly([locName, coords, true], 11);
-
-		map.once("moveend", () => {
-			showPopup(coords, props);
-		});
+		const loc = locations[locName];
+		searchComponent.flyToLoc(loc, 11);
 	};
 
 	function flyToRandom(event) {
-		const loc = event.detail;
-		searchComponent.setSearchTermAndFly(loc, 10);
+		const locName = event.detail;
+		const loc = locations[locName];
+		searchComponent.flyToLoc(loc, 10);
 	}
 
-	const showPopupFromEvent = function (e) {
-		const coords = e.features[0].geometry.coordinates;
-		const props = e.features[0].properties;
-		showPopup(coords, props);
+	const showPopup = function (loc: Loc) {
+		if (loc.desc == undefined) return;
+
+		['click', 'movestart', 'zoomstart'].forEach((e) => {
+			map.off(e, hidePopup);
+		});
+
+		map.once('moveend', () => {
+			popup.setLngLat(loc.coords);
+			const content = `
+				<div class="location">${loc.pref}&nbsp;${loc.munic}</div>
+				${addHighlight(loc.desc)}
+				<a href=${loc.url} target="_blank">Wikipedia</a>
+			`;
+			popup.setHTML(content);
+			popup.addTo(map);
+
+			['click', 'movestart', 'zoomstart'].forEach((e) => {
+				map.on(e, hidePopup);
+			});
+		});
 	};
-
-	const showPopup = function(coords, props) {
-		popup.setLngLat(coords);
-		const content = `
-			<div class="location">${props.pref}&nbsp;${props.munic}</div>
-			${addHighlight(props.desc)}
-			<a href=${props.url} target="_blank">Wikipedia</a>
-		`;
-		popup.setHTML(content);
-		popup.addTo(map);
-	}
 
 	const hidePopup = function () {
 		popup.remove();
@@ -187,13 +192,8 @@
 				});
 
 				[`people-label-${group}`, `people-circle-${group}`].forEach((c) => {
-					map.on('mouseenter', c, showPopupFromEvent);
 					map.on('click', c, flyToLabelClick);
 				});
-			});
-
-			['click', 'movestart', 'zoomstart'].forEach((e) => {
-				map.on(e, hidePopup);
 			});
 		});
 
@@ -210,8 +210,8 @@
 
 <section>
 	<div id="map" />
-	<Search {locations} {flyTo} bind:this={searchComponent} />
-	<Random {locationsWithPerson} on:click={flyToRandom} />
+	<Search {locations} {flyTo} {showPopup} bind:this={searchComponent} />
+	<Random {locationNamesWithPerson} on:click={flyToRandom} />
 </section>
 
 <style>
