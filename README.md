@@ -20,3 +20,16 @@ Built with [MapLibre GL JS](https://maplibre.org/) and [SvelteKit](https://kit.s
 - [OpenStreetMap Japan](https://openstreetmap.jp/)
   - Vector tiles: https://tile.openstreetmap.jp/
 - [Material Icons by Google](https://google.github.io/material-design-icons/)
+
+## Diretories
+
+- `preparation/`
+  - Data preparation code
+  - `$ poetry install`
+  - `$ poetry run jupyter notebook`
+  - => All code (notebooks) under `preparation/code/`
+- `app/`
+  - A SvelteKit app
+  - `$ npm install`
+  - `$ npm run serve`
+  - `$ npm run build`
