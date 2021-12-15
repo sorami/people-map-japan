@@ -4,6 +4,7 @@
 	export let locations: { [key: string]: Loc };
 	export let flyTo;
 	export let showPopup;
+	export let removeClearSearchTermListeners;
 
 	let searchTerm = '';
 	let showSearchResults = true;
@@ -23,6 +24,7 @@
 	export function clearSearchTerm(): void {
 		searchTerm = '';
 		showSearchResults = true;
+		removeClearSearchTermListeners();
 	}
 
 	function setSearchTerm(text: string): void {

@@ -31,15 +31,17 @@
 			.catch((e) => console.error(e));
 	});
 
-	function flyTo(center: [number, number], zoom: number): void {
-		if (!map) return;
-
+	const removeClearSearchTermListeners = function() {
 		['movestart', 'zoomstart'].forEach((e) => {
 			map.off(e, searchComponent.clearSearchTerm);
 		});
-	
-		map.flyTo({ center, zoom });
+	}
 
+	function flyTo(center: [number, number], zoom: number): void {
+		if (!map) return;
+
+		removeClearSearchTermListeners();
+		map.flyTo({ center, zoom });
 		map.once("moveend", () => {
 			['movestart', 'zoomstart'].forEach((e) => {
 				map.on(e, searchComponent.clearSearchTerm);
@@ -220,7 +222,7 @@
 
 <section>
 	<div id="map" />
-	<Search {locations} {flyTo} {showPopup} bind:this={searchComponent} />
+	<Search {locations} {flyTo} {showPopup} {removeClearSearchTermListeners} bind:this={searchComponent} />
 	<Random {locationNamesWithPerson} on:click={flyToRandom} />
 </section>
 
