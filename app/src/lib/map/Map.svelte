@@ -23,6 +23,7 @@
 			.then((res) => res.json())
 			.then((data) => {
 				locations = data;
+				// Randomでは、出身人物の存在する場所のみを対象とする
 				locationNamesWithPerson = Object.entries(locations)
 					.filter(([locName, loc]) => loc.desc)
 					.map(([locName, loc]) => locName);
