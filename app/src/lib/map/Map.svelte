@@ -32,13 +32,22 @@
 	});
 
 	function flyTo(center: [number, number], zoom: number): void {
-		if (map) {
-			map.flyTo({ center, zoom });
-		}
+		if (!map) return;
+
+		['movestart', 'zoomstart'].forEach((e) => {
+			map.off(e, searchComponent.clearSearchTerm);
+		});
+	
+		map.flyTo({ center, zoom });
+
+		map.once("moveend", () => {
+			['movestart', 'zoomstart'].forEach((e) => {
+				map.on(e, searchComponent.clearSearchTerm);
+			});
+		});
 	}
 
 	const flyToLabelClick = function (e) {
-		e.preventDefault();
 		const props = e.features[0].properties;
 		const locName = props.pref + props.munic;
 		const loc = locations[locName];

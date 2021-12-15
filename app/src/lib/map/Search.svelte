@@ -31,8 +31,8 @@
 	}
 
 	export function flyToLoc(loc: Loc, zoom: number): void {
-		setSearchTerm(loc.pref + loc.munic);
 		flyTo(loc.coords, zoom);
+		setSearchTerm(loc.pref + loc.munic);
 		showPopup(loc);
 	}
 </script>
