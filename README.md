@@ -7,6 +7,8 @@ A Japanese version of [A People Map of the US](https://pudding.cool/2019/05/peop
 
 Built with [MapLibre GL JS](https://maplibre.org/) and [SvelteKit](https://kit.svelte.dev/).
 
+See this presentation for details (in Japanese); [MapLibre, Svelte, Wikipediaデータを用いた地理空間情報可視化の事例 / MIERUNE Meetup mini #01 - Speaker Deck](https://speakerdeck.com/sorami/mierune-meetup-mini-number-01)
+
 ## Data Sources
 
 - [DBpedia Japanese](https://ja.dbpedia.org/)
