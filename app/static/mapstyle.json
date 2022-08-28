@@ -8,7 +8,7 @@
 	"sources": {
 		"openmaptiles": {
 			"type": "vector",
-			"url": "https://tile2.openstreetmap.jp/data/japan.json"
+			"url": "https://tile.openstreetmap.jp/data/planet.json"
 		}
 	},
 	"glyphs": "https://tile2.openstreetmap.jp/fonts/{fontstack}/{range}.pbf",
